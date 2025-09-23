@@ -2,7 +2,7 @@
 
 ## Project Overview
 This project is a **Regex-based Data Extraction Tool** developed as part of the Formative One - Regex Onboarding Hackathon.  
-The goal is to simulate processing large API responses containing mixed content (valid and invalid data) and accurately **extract and validate** the following data types:
+The goal is to simulate processing large API responses containing mixed content (valid,invalid data and noise) and accurately **extract and validate** the following data types:
 
 1. **Email Addresses**  
 2. **Phone Numbers**  
@@ -65,14 +65,14 @@ The tool demonstrates:
 - Validates:
   - Correct thousand separators
   - Exactly 2 decimal digits
-  - Only digits in integer part
+  - Only digits in the integer part
 - Flags malformed amounts like `$12.3` or `$1,23,456.78`
 
 ---
 
 ## Repository Structure
 
-alu_regex-data-extraction-{YourUsername}/
+alu_regex-data-extraction-G-Njunge/
 │
 ├── api_response.txt # Sample API response with mixed valid/invalid data
 ├── email_validation.py # Email extraction and validation
@@ -80,9 +80,8 @@ alu_regex-data-extraction-{YourUsername}/
 ├── creditcard_validation.py # Credit card extraction and validation
 ├── time_validation.py # Time extraction and validation
 ├── currency_validation.py # Currency extraction and validation
-├── all_validations.py # Combined script for all data types (optional)
+├── all_validations.py # Combined script for all data types 
 └── README.md # This file
-
 
 - Each module is **self-contained** for testing individual types.  
 - `all_validations.py` runs all extraction/validation at once for convenience.
@@ -95,62 +94,49 @@ alu_regex-data-extraction-{YourUsername}/
 ```bash
 git clone https://github.com/{YourUsername}/alu_regex-data-extraction-{YourUsername}.git
 cd alu_regex-data-extraction-{YourUsername}
-
-
-Ensure Python 3.x is installed:
-
+```
+2. Ensure Python 3.x is installed:
+```
 python --version
-
-
-Run individual validation scripts:
-
+```
+3. Run individual validation scripts:
+```
 python email_validation.py
 python phone_validation.py
 python creditcard_validation.py
 python time_validation.py
 python currency_validation.py
-
+```
+Or run combined script:
+```
+python all_validations.py
+```
 The output will list all candidates from api_response.txt along with validation status.
 
 Edge Case Handling
-
 Emails: missing @, numeric-only usernames, invalid domains
-
 Phones: dots, dashes, spaces, parentheses, country codes, invalid digits
-
 Credit Cards: wrong length, repeated digits, invalid characters, issuer heuristics
-
 Time: invalid hours/minutes, missing AM/PM, malformed separators
-
 Currency: missing $, malformed decimals, incorrect comma placement
 
 All errors provide descriptive messages, aiding debugging and validation.
 
 GitHub Best Practices
-
 Commits: Meaningful messages, frequent commits for each module.
-
 Code Structure: Modular scripts per data type, reusable validation functions.
-
 Documentation: Clear README, inline comments, edge-case explanations.
 
 Notes
-
 This project is implemented in Python 3.
-
 Designed for educational and testing purposes; not production-grade for financial or personal data.
-
 Encouraged to extend regex patterns or validations for more complex real-world data.
 
 Author
-
 Grace Njunge
 African Leadership University
 GitHub: https://github.com/G-Njunge
-
-
----
-
+```
 This `README.md` covers:
 
 - **Project overview** and goals  
@@ -160,4 +146,7 @@ This `README.md` covers:
 - **Edge-case handling** (important for rubric points)  
 - **GitHub best practices**  
 - **Author info**
+```
+
+
 
