@@ -36,7 +36,7 @@ def validate_credit_card(card):
     if not (13 <= len(clean_card) <= 16):
         return "Invalid: Must be 13–16 digits long"
 
-    # Reject obvious repeated-digit sequences like '0000...'
+    # Reject obvious repeated digit sequences like '0000...'
     if is_repeated_sequence(clean_card):
         return "Invalid: Repeated digit sequence (unlikely to be real card)"
 
@@ -63,7 +63,7 @@ cc_pattern = r'(?:\d{4}[-\s]?){3}\d{4}|\d{13,16}'
 # Extract candidates
 cc_candidates = re.findall(cc_pattern, text)
 
-# Clean up and dedupe
+# Clean up 
 cc_candidates = list(dict.fromkeys([c.strip() for c in cc_candidates]))  # preserves order
 
 # Validate each candidate

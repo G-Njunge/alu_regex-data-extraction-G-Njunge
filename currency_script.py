@@ -2,14 +2,15 @@ import re
 
 def validate_currency(candidate):
     """
-    Validates currency amounts of the form:
-    $1234.56 or $1,234.56
+    Validates currency amounts in various formats:
+    $1234.56, £1,234.56, €1200, RWF 1000, 12.50 RWF, UGX 50,000
     Returns detailed messages for invalid entries.
     """
     s = candidate.strip()
 
-    # Extract numeric part
-    numeric_part = s[1:]  # remove $
+    # Remove any known currency symbols or codes for numeric validation
+    numeric_part = re.sub(r'(?:\$|£|€|RWF|UGX|USD|EUR|GBP)', '', s, flags=re.IGNORECASE).strip()
+
     # Split integer and decimal if exists
     if '.' in numeric_part:
         int_part, dec_part = numeric_part.split('.', 1)
@@ -19,7 +20,6 @@ def validate_currency(candidate):
         int_part = numeric_part
         dec_part = None
 
-    # Check integer part
     # Remove commas for numeric check
     int_clean = int_part.replace(',', '')
     if not int_clean.isdigit():
@@ -28,7 +28,7 @@ def validate_currency(candidate):
     # Check commas placement (thousands separators)
     groups = int_part.split(',')
     if len(groups) > 1:
-        # first group can have 1-3 digits, others must have exactly 3
+        # First group can have 1-3 digits, others must have exactly 3
         if len(groups[0]) > 3 or any(len(g) != 3 for g in groups[1:]):
             return "Invalid: Incorrect comma placement in thousands"
 
@@ -43,12 +43,12 @@ except FileNotFoundError:
     print(f"Error: File not found at {file_path}")
     raise SystemExit(1)
 
-# Regex to capture currency amounts
-currency_pattern = r'\$[\d,]+(?:\.\d{2})?'
+# Regex to capture multiple currency formats
+currency_pattern = r'(?:\$|£|€|RWF|UGX)?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*(?:RWF|UGX|USD|EUR|GBP)?'
 
 candidates = re.findall(currency_pattern, text)
-# Deduplicate
-candidates_unique = list(dict.fromkeys([c.strip() for c in candidates]))
+# Deduplicate and remove empty matches
+candidates_unique = list(dict.fromkeys([c.strip() for c in candidates if c.strip()]))
 
 # Validate each candidate
 print("Currency Validation Results:\n")
