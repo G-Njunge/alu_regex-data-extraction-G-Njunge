@@ -14,3 +14,4 @@ $0.99 is small, $10,000.00 is large, 123abc is not valid
 Meeting now 00:00 or maybe 12:59 AM, 14.30 is wrong
 +1 (123) 456-7890 is international, (123) 456-7890 local
 0000 1111 2222 3333 looks valid, 123456789012345 too short
+Call me at (123) 456-7890 or at 123-456-7890
