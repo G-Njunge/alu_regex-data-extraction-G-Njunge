@@ -56,10 +56,11 @@ emails_without_at = [
 all_email_candidates = list(set(emails_with_at + emails_without_at))
 
 # Step 4: Validate each candidate
-print("Email Validation Results:\n")
+print("\nEmail Validation Results:")
 for email in all_email_candidates:
     result = validate_email(email)
     print(f"{email}: {result}")
+
 
 
 #TIME VALIDATION
@@ -125,10 +126,11 @@ for c in candidates:
         candidates_unique.append(cc)
 
 # Validate and print
-print("Time Validation Results:\n")
+print("\nTime Validation Results:")
 for cand in candidates_unique:
     result = validate_time(cand)
     print(f"{cand}: {result}")
+
 
 
 ##CREDIT CARD VALIDATION
@@ -162,7 +164,7 @@ def validate_credit_card(card):
 
     # Ensure only digits remain
     if not clean_card.isdigit():
-        return "Invalid: Contains non-digit characters"
+        return "Invalid: Contains nondigit characters"
 
     # Check digit length
     if not (13 <= len(clean_card) <= 16):
@@ -199,10 +201,11 @@ cc_candidates = re.findall(cc_pattern, text)
 cc_candidates = list(dict.fromkeys([c.strip() for c in cc_candidates]))  # preserves order
 
 # Validate each candidate
-print("Credit Card Validation Results ):")
+print("\nCredit Card Validation Results):")
 for card in cc_candidates:
     result = validate_credit_card(card)
     print(f"{card}: {result}")
+
 
 
 ##CURRENCY VALIDATION
@@ -229,7 +232,7 @@ def validate_currency(candidate):
     # Remove commas for numeric check
     int_clean = int_part.replace(',', '')
     if not int_clean.isdigit():
-        return "Invalid: Contains non-digit characters in integer part"
+        return "Invalid: Contains nondigit characters in integer part"
 
     # Check commas placement (thousands separators)
     groups = int_part.split(',')
@@ -253,14 +256,15 @@ except FileNotFoundError:
 currency_pattern = r'(?:\$|£|€|RWF|UGX)?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*(?:RWF|UGX|USD|EUR|GBP)?'
 
 candidates = re.findall(currency_pattern, text)
-# Deduplicate and remove empty matches
+# remove duplicate and remove empty matches
 candidates_unique = list(dict.fromkeys([c.strip() for c in candidates if c.strip()]))
 
 # Validate each candidate
-print("Currency Validation Results:\n")
+print("\nCurrency Validation Results:")
 for cand in candidates_unique:
     result = validate_currency(cand)
     print(f"{cand}: {result}")
+
 
 
 ##PHONE NUMBER VALIDATION
@@ -302,7 +306,7 @@ phone_candidates = re.findall(phone_pattern, text)
 phone_candidates = list(set([p.strip() for p in phone_candidates]))
 
 # Validate each candidate
-print("Phone Number Validation Results:\n")
+print("\nPhone Number Validation Results:")
 for number in phone_candidates:
     result = validate_phone(number)
     print(f"{number}: {result}")
