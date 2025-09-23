@@ -1,0 +1,16 @@
+Hello, contact user@example.com for details
+Random note: lorem ipsum
+Price today is $19.99, but yesterday it was 19.99$
+Meeting at 14:30, or maybe 25:00 if needed
+Call me at (123) 456-7890 or 12-3456-7890
+Another card: 1234 5678 9012 3456 and some junk abcd efgh ijkl mnop
+firstname.lastname@company.co.uk is our admin
+$1,234.56 is on sale today, while USD19.99 was yesterday
+2:30 PM is the time, invalid time 2:60 PM might appear
+Dial 123-456-7890 or 123456789, or just ignore 123-45-67890
+Another credit card 1234-5678-9012-3456 mixed with garbage !@#$$%^
+first name@company.com has a space, and hello@@world.com is weird
+$0.99 is small, $10,000.00 is large, 123abc is not valid
+Meeting now 00:00 or maybe 12:59 AM, 14.30 is wrong
++1 (123) 456-7890 is international, (123) 456-7890 local
+0000 1111 2222 3333 looks valid, 123456789012345 too short
