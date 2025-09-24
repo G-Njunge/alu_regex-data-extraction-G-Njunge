@@ -27,9 +27,7 @@ def validate_email(email):
         return f"Invalid: Top-level domain '{domain_parts[-1]}' is invalid"
 
     return "Valid email"
-
-# Read interleaved API response
-file_path = r"C:\Users\san\Desktop\WebDev\alu_regex-data-extraction-G-Njunge\api_response.txt"  # use raw string for Windows paths
+file_path = r"api_response.txt"
 try:
     with open(file_path, 'r') as file:
         text = file.read()
@@ -185,8 +183,8 @@ def validate_credit_card(card):
 # Read interleaved API response
 file_path = r"api_response.txt"
 try:
-    with open( r"C:\Users\san\Desktop\WebDev\alu_regex-data-extraction-G-Njunge\api_response.txt") as f:
-        text = f.read()
+    with open(file_path, 'r') as file:
+        text = file.read()
 except FileNotFoundError:
     print(f"Error: File not found at {file_path}")
     exit()
@@ -263,7 +261,7 @@ candidates_unique = list(dict.fromkeys([c.strip() for c in candidates if c.strip
 print("\nCurrency Validation Results:")
 for cand in candidates_unique:
     result = validate_currency(cand)
-    print(f"{cand}: {result}")
+    print(f"{cand} :  {result}")
 
 
 

@@ -29,7 +29,7 @@ def validate_email(email):
     return "Valid email"
 
 # Read interleaved API response
-file_path = r"C:\Users\san\Desktop\WebDev\alu_regex-data-extraction-G-Njunge\api_response.txt"  # use raw string for Windows paths
+file_path = r"api_response.txt"
 try:
     with open(file_path, 'r') as file:
         text = file.read()
