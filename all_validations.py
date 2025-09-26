@@ -207,8 +207,6 @@ for card in cc_candidates:
 
 
 ##CURRENCY VALIDATION
-import re
-
 def validate_currency(candidate):
     """
     Validates currency amounts with mandatory currency markers:
@@ -275,8 +273,6 @@ for cand in candidates_unique:
 
 
 ##PHONE NUMBER VALIDATION
-import re
-
 def validate_phone(number):
     # Remove non-digit characters
     digits = re.sub(r'\D', '', number)
