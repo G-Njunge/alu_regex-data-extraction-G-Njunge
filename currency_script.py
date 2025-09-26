@@ -2,14 +2,21 @@ import re
 
 def validate_currency(candidate):
     """
-    Validates currency amounts in various formats:
-    $1234.56, £1,234.56, €1200, RWF 1000, 12.50 RWF, UGX 50,000
+    Validates currency amounts with mandatory currency markers:
+    Examples: $1234.56, £1,234.56, 12.50 RWF, Ksh 1200
     Returns detailed messages for invalid entries.
     """
     s = candidate.strip()
 
-    # Remove any known currency symbols or codes for numeric validation
-    numeric_part = re.sub(r'(?:\$|£|€|RWF|UGX|USD|EUR|GBP)', '', s, flags=re.IGNORECASE).strip()
+    # Must have a currency marker: symbol or code
+    marker_pattern = r'^\s*(?:\$|£|€|RWF|UGX|USD|EUR|GBP|KSH|KES)'
+    marker_pattern_end = r'(?:RWF|UGX|USD|EUR|GBP|KSH|KES)\s*$'
+
+    if not re.search(marker_pattern, s, flags=re.IGNORECASE) and not re.search(marker_pattern_end, s, flags=re.IGNORECASE):
+        return "Invalid: Missing currency marker"
+
+    # Remove known symbols/codes for numeric validation
+    numeric_part = re.sub(r'(?:\$|£|€|RWF|UGX|USD|EUR|GBP|KSH|KES)', '', s, flags=re.IGNORECASE).strip()
 
     # Split integer and decimal if exists
     if '.' in numeric_part:
@@ -28,13 +35,13 @@ def validate_currency(candidate):
     # Check commas placement (thousands separators)
     groups = int_part.split(',')
     if len(groups) > 1:
-        # First group can have 1-3 digits, others must have exactly 3
         if len(groups[0]) > 3 or any(len(g) != 3 for g in groups[1:]):
             return "Invalid: Incorrect comma placement in thousands"
 
     return "Valid currency amount"
 
-# Read interleaved API response
+
+# Read file
 file_path = r"api_response.txt"
 try:
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -43,10 +50,11 @@ except FileNotFoundError:
     print(f"Error: File not found at {file_path}")
     raise SystemExit(1)
 
-# Regex to capture multiple currency formats
-currency_pattern = r'(?:\$|£|€|RWF|UGX)?\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*(?:RWF|UGX|USD|EUR|GBP)?'
+# Regex to capture numbers with mandatory currency markers
+currency_pattern = r'(?:\$|£|€|RWF|UGX|USD|EUR|GBP|KSH|KES)\s*\d{1,3}(?:,\d{3})*(?:\.\d{2})?|' \
+                   r'\d{1,3}(?:,\d{3})*(?:\.\d{2})?\s*(?:RWF|UGX|USD|EUR|GBP|KSH|KES)'
 
-candidates = re.findall(currency_pattern, text)
+candidates = re.findall(currency_pattern, text, flags=re.IGNORECASE)
 # Deduplicate and remove empty matches
 candidates_unique = list(dict.fromkeys([c.strip() for c in candidates if c.strip()]))
 
