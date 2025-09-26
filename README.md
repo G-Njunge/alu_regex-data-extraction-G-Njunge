@@ -1,4 +1,3 @@
-# ALU Regex Data Extraction - {YourUsername}
 
 ## Project Overview
 This project is a **Regex-based Data Extraction Tool** developed as part of the Formative One - Regex Onboarding Hackathon.  
